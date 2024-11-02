@@ -13,18 +13,6 @@ public class LibraryPanelController : MonoBehaviour
         AssignObjects();
     }
 
-
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     void AssignObjects()
     {
         enemyCardGrid = Master.GetChildByName(gameObject, "ListZombies").GetComponent<UIGrid>();
@@ -40,6 +28,12 @@ public class LibraryPanelController : MonoBehaviour
 
     }
 
+    public void Card_OnClick(GameObject go)
+    {
+        string enemyID = go.transform.parent.name.Split('_')[1];
+        Master.UI.ShowDialog(UIController.Dialog.ListDialogs.EnemyInfoDialog, 0.4f, new string[] { enemyID });
+    }
+    
     public void SetListEnemyCard()
     {
         foreach (EnemyDataController.EnemyData enemyData in Master.EnemyData.listEnemyData)
@@ -66,11 +60,5 @@ public class LibraryPanelController : MonoBehaviour
         enemyCard_10.GetComponentInChildren<BoxCollider2D>().enabled = false;
 
         enemyCardGrid.Reposition();
-    }
-
-    public void Card_OnClick(GameObject go)
-    {
-        string enemyID = go.transform.parent.name.Split('_')[1];
-        Master.UI.ShowDialog(UIController.Dialog.ListDialogs.EnemyInfoDialog, 0.4f, new string[] { enemyID });
     }
 }

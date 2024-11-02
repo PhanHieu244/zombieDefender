@@ -176,7 +176,13 @@ public class UIControllerMenu : UIController
         currentPanel = index;
     }
 
-
+    public void GoToFirstMenu()
+    {
+        Transition(() =>
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("FirstMenu");
+        });
+    }
 
     public void GoToShopButton_OnClick()
     {
@@ -188,14 +194,6 @@ public class UIControllerMenu : UIController
     {
         Master.PlaySoundButtonClick();
         ShowDialog(UIController.Dialog.ListDialogs.FillEnergyDialog);
-    }
-
-    public void GoToFirstMenu()
-    {
-        Transition(() =>
-        {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("FirstMenu");
-        });
     }
 
 }

@@ -18,19 +18,17 @@ public class QuestPanelController : MonoBehaviour {
 
     }
 
-	void Start () {
-	
-	}
-	
     public void OnOpen()
     {
         SetListQuest();
     }
-
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    
+    void ClearQuestObject()
+    {
+        while (questGrid.gameObject.transform.childCount > 0)
+            NGUITools.Destroy(questGrid.gameObject.transform.GetChild(0).gameObject);
+    }
+    
 
     public void SetListQuest()
     {
@@ -45,9 +43,5 @@ public class QuestPanelController : MonoBehaviour {
 
     }
 
-    void ClearQuestObject()
-    {
-        while (questGrid.gameObject.transform.childCount > 0)
-            NGUITools.Destroy(questGrid.gameObject.transform.GetChild(0).gameObject);
-    }
+    
 }

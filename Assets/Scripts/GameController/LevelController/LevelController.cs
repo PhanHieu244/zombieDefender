@@ -29,12 +29,6 @@ public class LevelController : MonoBehaviour
         SetLevelInfo();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     void OnDestroy()
     {
         StopAllCoroutines();

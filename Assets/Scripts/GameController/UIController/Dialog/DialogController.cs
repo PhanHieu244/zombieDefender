@@ -36,17 +36,7 @@ public class DialogController : MonoBehaviour
         OnAwake();
     }
 
-    void Start()
-    {
-        if (isAutoPlaySound)
-        {
-            PlayShowHideSound();
-        }
-
-        ShowBannerAd();
-
-        OnStart();
-    }
+    
 
     // Update is called once per frame
     void Update()
@@ -65,23 +55,15 @@ public class DialogController : MonoBehaviour
 
     }
 
-    public virtual void ShowBannerAd()
+
+    void Start()
     {
-        /*if (isShowBannerAd)
+        if (isAutoPlaySound)
         {
-            if (bannerAdPosition == BannerAdPosition.Top)
-            {
-                Master.Ad.Admob.ShowTopBanner();
-            }
-            else
-            {
-                Master.Ad.Admob.ShowBottomBanner();
-            }
+            PlayShowHideSound();
         }
-        else
-        {
-            Master.Ad.Admob.HideBanner();
-        }*/
+
+        OnStart();
     }
 
     public virtual void OnOpen(string[] agruments = null, System.Action onCloseComplete = null)
@@ -108,14 +90,17 @@ public class DialogController : MonoBehaviour
         Master.UI.CloseDialog(gameObject, 0.4f, tempOnComplete);
     }
 
-    public virtual void OnShowComplete()
-    {
-
-    }
-
+  
 
     public void PlayShowHideSound()
     {
         Master.Audio.PlaySound("snd_showHideDialog", 0.3f);
     }
+    
+    
+    public virtual void OnShowComplete()
+    {
+
+    }
+
 }

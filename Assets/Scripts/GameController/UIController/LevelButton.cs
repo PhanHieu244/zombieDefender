@@ -13,17 +13,6 @@ public class LevelButton : MonoBehaviour
     public List<GameObject> stars;
 
 
-    void Start()
-    {
-        //SetAttribute();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
-
     public void SetAttribute(int levelIndex)
     {
         this.levelIndex = levelIndex;

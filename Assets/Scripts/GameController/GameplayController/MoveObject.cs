@@ -64,16 +64,6 @@ public class MoveObject : MonoBehaviour
         DestroyController();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (isMove)
-        {
-            MoveController();
-        }
-        RotationController();
-    }
-
     void MoveController()
     {
         if (isMovingToPosition) return;
@@ -121,29 +111,15 @@ public class MoveObject : MonoBehaviour
                 break;
         }
     }
-
-    void SetTimeToReverseMove()
+    
+    // Update is called once per frame
+    void Update()
     {
-        Master.WaitAndDo(timeToMoveReverse, () =>
+        if (isMove)
         {
-            isMoveRight = !isMoveRight;
-            isMoveUp = !isMoveUp;
-            SetTimeToReverseMove();
-        });
-    }
-
-    void ScaleController()
-    {
-        if (isScale)
-        {
-            transform.DOScale(new Vector3(maxSize, maxSize, maxSize), time).OnComplete(() =>
-            {
-                transform.DOScale(new Vector3(minSize, minSize, minSize), time).OnComplete(() =>
-                {
-                    ScaleController();
-                });
-            });
+            MoveController();
         }
+        RotationController();
     }
 
     void RotationController()
@@ -174,6 +150,30 @@ public class MoveObject : MonoBehaviour
         if (isAutoDestroy)
         {
             Destroy(gameObject, timeToDestroy);
+        }
+    }
+    
+    void SetTimeToReverseMove()
+    {
+        Master.WaitAndDo(timeToMoveReverse, () =>
+        {
+            isMoveRight = !isMoveRight;
+            isMoveUp = !isMoveUp;
+            SetTimeToReverseMove();
+        });
+    }
+
+    void ScaleController()
+    {
+        if (isScale)
+        {
+            transform.DOScale(new Vector3(maxSize, maxSize, maxSize), time).OnComplete(() =>
+            {
+                transform.DOScale(new Vector3(minSize, minSize, minSize), time).OnComplete(() =>
+                {
+                    ScaleController();
+                });
+            });
         }
     }
 

@@ -46,6 +46,11 @@ public class SkillController : MonoBehaviour
     {
         return true;
     }
+    
+    void OnTriggerEnter2D(Collider2D coll)
+    {
+        CollisionController(coll.gameObject);
+    }
 
     public virtual void OnChoosingPosition()
     {
@@ -58,11 +63,6 @@ public class SkillController : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D coll)
-    {
-        CollisionController(coll.gameObject);
-    }
-
-    void OnTriggerEnter2D(Collider2D coll)
     {
         CollisionController(coll.gameObject);
     }

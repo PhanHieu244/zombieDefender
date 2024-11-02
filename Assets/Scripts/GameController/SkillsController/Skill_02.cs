@@ -10,6 +10,11 @@ public class Skill_02 : SkillController
         gameObject.transform.localScale = new Vector3(Master.SkillData.skill_02_data.Raridus, Master.SkillData.skill_02_data.Raridus, 0);
     }
 
+    public override void OnChoosingPosition()
+    {
+        gameObject.transform.parent.transform.position = Master.Touch.mousePositionGameplay;
+    }
+    
     public override bool Set()
     {
         LayerMask layerMask = 1 << LayerMask.NameToLayer("Gameplay");
@@ -25,11 +30,6 @@ public class Skill_02 : SkillController
         }
         Destroy(transform.parent.gameObject);
         return true;
-    }
-
-    public override void OnChoosingPosition()
-    {
-        gameObject.transform.parent.transform.position = Master.Touch.mousePositionGameplay;
     }
 
     public override void CollisionController(GameObject obj)

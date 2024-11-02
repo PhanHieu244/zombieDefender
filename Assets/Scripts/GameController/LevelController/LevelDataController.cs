@@ -80,6 +80,12 @@ public class LevelDataController : MonoBehaviour
     {
         StopAllCoroutines();
     }
+    
+    public void SetStarAtLevel(int level, int star)
+    {
+        ObscuredPrefs.SetInt("StarAtLevel_" + level, star);
+        ObscuredPrefs.Save();
+    }
 
     public void LoadLevelData()
     {
@@ -113,16 +119,23 @@ public class LevelDataController : MonoBehaviour
 
         return levelDataCollection.ListLevelData[levelIndex - 1];
     }
+    
+    public void Save(LevelDataCollection levelDataCollection)
+    {
+        string path = Application.dataPath + "/Resources/Data/Levels/LevelData.xml";
+
+        var serializer = new XmlSerializer(typeof(LevelDataCollection));
+        using (var stream = new FileStream(path, FileMode.Create))
+        {
+
+            serializer.Serialize(stream, levelDataCollection);
+            Debug.Log("Saved XML to " + path);
+        }
+    }
 
     public int GetStarAtLevel(int level)
     {
         return ObscuredPrefs.GetInt("StarAtLevel_" + level, 0);
-    }
-
-    public void SetStarAtLevel(int level, int star)
-    {
-        ObscuredPrefs.SetInt("StarAtLevel_" + level, star);
-        ObscuredPrefs.Save();
     }
 
     public void SetLastLevel(int level)
@@ -144,19 +157,6 @@ public class LevelDataController : MonoBehaviour
             totalStarAtLevels += GetStarAtLevel(i);
         }
         return totalStarAtLevels;
-    }
-
-    public void Save(LevelDataCollection levelDataCollection)
-    {
-        string path = Application.dataPath + "/Resources/Data/Levels/LevelData.xml";
-
-        var serializer = new XmlSerializer(typeof(LevelDataCollection));
-        using (var stream = new FileStream(path, FileMode.Create))
-        {
-
-            serializer.Serialize(stream, levelDataCollection);
-            Debug.Log("Saved XML to " + path);
-        }
     }
 
 

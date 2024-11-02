@@ -92,18 +92,6 @@ public class QuestDataController : MonoBehaviour
         }
     }
 
-    public QuestData GetQuestDataByID(string id)
-    {
-        foreach (QuestData questData in questDataCollection.ListQuestData)
-        {
-            if (id == questData.QuestID)
-            {
-                return questData;
-            }
-        }
-        return null;
-    }
-
     public void IncreaseProgressValue(string questID, int value = 0, bool isAllowLargerThanRequireValue = true)
     {
         int currentProgressValue = GetCurrentProgressValue(questID);
@@ -130,6 +118,31 @@ public class QuestDataController : MonoBehaviour
         ObscuredPrefs.SetInt("CurrentProgressValueQuest_" + questID, value);
         ObscuredPrefs.Save();
     }
+    
+    public QuestData GetQuestDataByID(string id)
+    {
+        foreach (QuestData questData in questDataCollection.ListQuestData)
+        {
+            if (id == questData.QuestID)
+            {
+                return questData;
+            }
+        }
+        return null;
+    }
+    
+    public bool isHaveQuestComplete()
+    {
+        Master.QuestData.LoadQuestData();
+        foreach (QuestData item in questDataCollection.ListQuestData)
+        {
+            if (item.CurrentProgressValue >= item.RequireValue.Value)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public void IncreaseStep(string questID)
     {
@@ -154,19 +167,6 @@ public class QuestDataController : MonoBehaviour
     public int GetCurrentStep(string questID)
     {
         return ObscuredPrefs.GetInt("CurrentStepQuest_" + questID, 0);
-    }
-
-    public bool isHaveQuestComplete()
-    {
-        Master.QuestData.LoadQuestData();
-        foreach (QuestData item in questDataCollection.ListQuestData)
-        {
-            if (item.CurrentProgressValue >= item.RequireValue.Value)
-            {
-                return true;
-            }
-        }
-        return false;
     }
 
 

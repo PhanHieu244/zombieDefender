@@ -26,15 +26,24 @@ public class LaneController : MonoBehaviour
        // SetLane(maxLane);
     }
 
-    void Start()
+    public void ChangeColorPosition()
     {
+        foreach (GameObject gameObjectAtMouse in Master.Touch.listGameObjectsAtMousePosition)
+        {
+            foreach (GameObject position in listUnitAtPosition.Keys)
+            {
+                GameObject icon = position.transform.Find("Icon").gameObject;
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+                if (gameObjectAtMouse == position)
+                {
+                    icon.GetComponent<SpriteRenderer>().color = new Color(0, 1, 1);
+                }
+                else
+                {
+                    icon.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
+                }
+            }
+        }
     }
 
     public void SetLane(int maxLane, int maxPositionInLane)
@@ -60,15 +69,15 @@ public class LaneController : MonoBehaviour
             }
         }
     }
+    
+    public void RemoveUnitAtPosition(GameObject position)
+    {
+        listUnitAtPosition[position] = null;
+    }
 
     public void SetUnitAtPosition(GameObject position, GameObject unit)
     {
         listUnitAtPosition[position] = unit;
-    }
-
-    public void RemoveUnitAtPosition(GameObject position)
-    {
-        listUnitAtPosition[position] = null;
     }
 
     public void ShowUnitPositionsAvailable()
@@ -83,26 +92,6 @@ public class LaneController : MonoBehaviour
         }
     }
 
-    public void ChangeColorPosition()
-    {
-        foreach (GameObject gameObjectAtMouse in Master.Touch.listGameObjectsAtMousePosition)
-        {
-            foreach (GameObject position in listUnitAtPosition.Keys)
-            {
-                GameObject icon = position.transform.Find("Icon").gameObject;
-
-                if (gameObjectAtMouse == position)
-                {
-                    icon.GetComponent<SpriteRenderer>().color = new Color(0, 1, 1);
-                }
-                else
-                {
-                    icon.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
-                }
-            }
-        }
-    }
-
 
     public void HideUnitPosition()
     {
@@ -110,6 +99,26 @@ public class LaneController : MonoBehaviour
         {
             position.SetActive(false);
         }
+    }
+    
+    
+    public bool isExistCharacterByTagInAllLane(string tag)
+    {
+        for (int i = 1; i <= Master.Level.currentLevelData.NumberOfLanes; i++)
+        {
+            foreach (GameObject character in listLanes[i])
+            {
+                if (character != null)
+                {
+                    if (character.tag == tag)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+        
+        return false;
     }
 
     public void SetCharacterAtLane(GameObject character, int lane)
@@ -156,25 +165,6 @@ public class LaneController : MonoBehaviour
                 }
             }
         }
-        return false;
-    }
-
-    public bool isExistCharacterByTagInAllLane(string tag)
-    {
-        for (int i = 1; i <= Master.Level.currentLevelData.NumberOfLanes; i++)
-        {
-            foreach (GameObject character in listLanes[i])
-            {
-                if (character != null)
-                {
-                    if (character.tag == tag)
-                    {
-                        return true;
-                    }
-                }
-            }
-        }
-        
         return false;
     }
 }

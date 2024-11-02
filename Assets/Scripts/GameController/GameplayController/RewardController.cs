@@ -16,27 +16,6 @@ public class RewardController : MonoBehaviour
     static int increaseGemPercenetPerLevel = 5; //%
     static float increaseGemPercentPerStarGot = 10; //%
 
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    public static int GetStarReward(int level, int starGotAtLevel)
-    {
-        int star = starFirst;
-        star = (int)Master.IncreaseValues(star, level, increaseStarPercentPerLevel);
-        star = (int)Master.IncreaseValues(star, starGotAtLevel, increaseStarPercentPerStarGot);
-
-        Master.Stats.Star += star;
-        return star;
-    }
-
     public static int GetGemReward(int level, int starGotAtLevel)
     {
         float gem = gemFirst;
@@ -51,5 +30,17 @@ public class RewardController : MonoBehaviour
         Master.Stats.Gem += (int)gem;
         return (int)gem;
     }
+
+    public static int GetStarReward(int level, int starGotAtLevel)
+    {
+        int star = starFirst;
+        star = (int)Master.IncreaseValues(star, level, increaseStarPercentPerLevel);
+        star = (int)Master.IncreaseValues(star, starGotAtLevel, increaseStarPercentPerStarGot);
+
+        Master.Stats.Star += star;
+        return star;
+    }
+
+    
 
 }

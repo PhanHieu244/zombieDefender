@@ -17,6 +17,15 @@ public class Skill_03_Rocket : SkillController
         GetComponent<BoxCollider2D>().enabled = false;
         Master.PlayAnimation(spriteRenderer, "Textures/Skills/Skill_03/SkillAnimation", 0, 3, 0.1f, true, null, this);
     }
+    
+    public override void CollisionController(GameObject obj)
+    {
+        if (obj.tag == "Enemy")
+        {
+            obj.GetComponent<EnemyController>().GetHit(damage);
+            // obj.SendMessage("GetHit", new object[] { (object)damage, (object) false}, SendMessageOptions.DontRequireReceiver);
+        }
+    }
 
     public void SetAttribute(Vector3 startPos, Vector3 endPos, float damage)
     {
@@ -42,15 +51,6 @@ public class Skill_03_Rocket : SkillController
                     Destroy(transform.parent.gameObject);
                 }, this);
             }
-        }
-    }
-
-    public override void CollisionController(GameObject obj)
-    {
-        if (obj.tag == "Enemy")
-        {
-            obj.GetComponent<EnemyController>().GetHit(damage);
-           // obj.SendMessage("GetHit", new object[] { (object)damage, (object) false}, SendMessageOptions.DontRequireReceiver);
         }
     }
 }

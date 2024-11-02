@@ -55,31 +55,6 @@ public class HomePanelController : MonoBehaviour
         alertQuestCompleteIcon = Master.GetChildByName(gameObject, "AlertQuestCompleteIcon");
     }
 
-    public void OnOpen()
-    {
-        SetSettings();
-        SetLevelButton();
-        CheckAlertQuestComplete();
-
-        if (!Master.Tutorial.CheckAndStartTutorial(TutorialController.TutorialsIndex.BuildUnitInGameplay))
-        {
-            if (Master.Stats.Star >= 150)
-            {
-                Master.Tutorial.CheckAndStartTutorial(TutorialController.TutorialsIndex.UpgradeStatsOfUnit);
-            }
-
-            if (!Master.Tutorial.isDoingTutorial)
-            {
-                if (Master.LevelData.lastLevel >= FreeRewardController.levelCanGetFreeReward)
-                {
-                    Master.Tutorial.CheckAndStartTutorial(TutorialController.TutorialsIndex.GetFreeReward);
-                }
-            }
-
-        }
-
-    }
-
     public void SetLevelButton()
     {
         Vector3 posLastLevelButton = Vector3.zero;
@@ -131,6 +106,31 @@ public class HomePanelController : MonoBehaviour
             freeRewardTitle.GetComponent<MoveObject>().enabled = false;
         }
     }
+    
+    public void OnOpen()
+    {
+        SetSettings();
+        SetLevelButton();
+        CheckAlertQuestComplete();
+
+        if (!Master.Tutorial.CheckAndStartTutorial(TutorialController.TutorialsIndex.BuildUnitInGameplay))
+        {
+            if (Master.Stats.Star >= 150)
+            {
+                Master.Tutorial.CheckAndStartTutorial(TutorialController.TutorialsIndex.UpgradeStatsOfUnit);
+            }
+
+            if (!Master.Tutorial.isDoingTutorial)
+            {
+                if (Master.LevelData.lastLevel >= FreeRewardController.levelCanGetFreeReward)
+                {
+                    Master.Tutorial.CheckAndStartTutorial(TutorialController.TutorialsIndex.GetFreeReward);
+                }
+            }
+
+        }
+
+    }
 
     public void FreeRewardButton_OnClick()
     {
@@ -140,8 +140,24 @@ public class HomePanelController : MonoBehaviour
         Master.PlaySoundButtonClick();
         Master.UI.ShowDialog("FreeRewardDialog", 0.5f);
     }
+    
 
+    public void ToggleAudioSettingButton_OnClick(GameObject go)
+    {
+        Master.PlaySoundButtonClick();
+        string goName = go.name;
+        if (goName == "Sound")
+        {
+            Master.Audio.ToggleSound();
+        }
+        else if (goName == "Music")
+        {
+            Master.Audio.ToggleBackgroundMusic();
+        }
 
+        SetSettings();
+    }
+    
     public void SetSettings()
     {
         if (Master.Audio.isSoundOn)
@@ -162,22 +178,6 @@ public class HomePanelController : MonoBehaviour
             Master.GetChildByName(musicTexture.gameObject, "X").SetActive(true);
         }
 
-    }
-
-    public void ToggleAudioSettingButton_OnClick(GameObject go)
-    {
-        Master.PlaySoundButtonClick();
-        string goName = go.name;
-        if (goName == "Sound")
-        {
-            Master.Audio.ToggleSound();
-        }
-        else if (goName == "Music")
-        {
-            Master.Audio.ToggleBackgroundMusic();
-        }
-
-        SetSettings();
     }
 
     void CheckAlertQuestComplete()

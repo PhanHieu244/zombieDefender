@@ -51,11 +51,6 @@ public class SkillPanelController : MonoBehaviour
         AssignObject();
     }
 
-    void Start()
-    {
-        // AssignObject();
-    }
-
     public void OnOpen()
     {
         //AssignObject();
@@ -144,6 +139,13 @@ public class SkillPanelController : MonoBehaviour
         Skill_03_Assign.rangeLabel.text = Master.SkillData.skill_03_data.Range.ToString();
 
     }
+    
+    public void UpgardeSkillButton_OnClick(GameObject button)
+    {
+        string skillID = button.transform.parent.parent.name.Split('_')[1];
+        Master.SkillData.doUpgradeSkill(skillID);
+        SetInfo();
+    }
 
 
     private void SetProgressTexture(int value, List<UITexture> listTexture)
@@ -177,13 +179,6 @@ public class SkillPanelController : MonoBehaviour
 
             return true;
         }
-    }
-
-    public void UpgardeSkillButton_OnClick(GameObject button)
-    {
-        string skillID = button.transform.parent.parent.name.Split('_')[1];
-        Master.SkillData.doUpgradeSkill(skillID);
-        SetInfo();
     }
 
 }

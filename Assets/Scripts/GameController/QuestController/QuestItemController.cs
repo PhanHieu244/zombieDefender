@@ -65,6 +65,20 @@ public class QuestItemController : MonoBehaviour
 
         SetButton();
     }
+    
+    public void OnTouchIn()
+    {
+        if (!isComplete) return;
+
+        Master.Stats.Gem += questData.Reward.Gem;
+        Master.Stats.Star += questData.Reward.Star;
+        Master.QuestData.IncreaseStep(questData.QuestID);
+        Master.QuestData.LoadQuestData();
+        //SetAttribute(Master.QuestData.GetQuestDataByID(questData.QuestID));
+        Master.UI.ShowDialog("GotRewardDialog", 0.5f, new string[] { questData.Reward.Gem.ToString(), questData.Reward.Star.ToString() });
+        Master.UIMenu.panels[3].GetComponent<QuestPanelController>().SetListQuest();
+
+    }
 
     void SetButton()
     {
@@ -80,20 +94,6 @@ public class QuestItemController : MonoBehaviour
             bgTexture.gameObject.GetComponent<BoxCollider2D>().enabled = false;
             GetComponent<BoxCollider2D>().enabled = false;
         }
-    }
-
-    public void OnTouchIn()
-    {
-        if (!isComplete) return;
-
-        Master.Stats.Gem += questData.Reward.Gem;
-        Master.Stats.Star += questData.Reward.Star;
-        Master.QuestData.IncreaseStep(questData.QuestID);
-        Master.QuestData.LoadQuestData();
-        //SetAttribute(Master.QuestData.GetQuestDataByID(questData.QuestID));
-        Master.UI.ShowDialog("GotRewardDialog", 0.5f, new string[] { questData.Reward.Gem.ToString(), questData.Reward.Star.ToString() });
-        Master.UIMenu.panels[3].GetComponent<QuestPanelController>().SetListQuest();
-
     }
 
 }

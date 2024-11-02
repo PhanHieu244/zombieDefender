@@ -46,73 +46,6 @@ public class LevelCompleteDialog : DialogController
         shareButtons = Master.GetChildByName(gameObject, "ShareButtons");
     }
 
-    public override void OnOpen(string[] agruments = null, Action onCloseComplete = null)
-    {
-        Master.Tutorial.CheckAndFinishTutorial();
-
-        //stop game
-        Time.timeScale = 0;
-        starRewardLabel.text = "--";
-        gemRewardLabel.text = "--";
-        allButtons.transform.localPosition = new Vector3(allButtons.transform.localPosition.x, -500, 0);
-        allButtons.SetActive(false);
-        //check is victory
-
-        if (Master.Gameplay.unitsDead >= Master.Level.currentLevelData.NumberOfUnitsAllowedDead || Master.Gameplay.zombiesEscaped > 0)
-        {
-            isVictory = false;
-        }
-
-        if (Master.LevelData.currentLevel <= Master.LevelData.lastLevel)
-        {
-            isPlayedThisLevel = true;
-        }
-
-        Master.Audio.StopBackgroundMusic();
-
-        if (isVictory)
-        {
-            Master.Stats.TimesLevelComplete++;
-
-            Master.Audio.PlaySound("snd_victory_2", 0.8f);
-
-            //calculate star
-            float percentUnitDead = ((float)Master.Gameplay.unitsDead / Master.Level.currentLevelData.NumberOfUnitsAllowedDead) * 100;
-            if (percentUnitDead < 20)
-            {
-                star = 3;
-            }
-            else if (percentUnitDead >= 20 && percentUnitDead < 45)
-            {
-                star = 2;
-            }
-
-            //set Status icon
-            completeStatusTexture.mainTexture = Resources.Load<Texture2D>("Textures/UI/Dialog/LevelComplete/victory_new");
-
-            //save level data
-            gemRewardValue = RewardController.GetGemReward(Master.LevelData.currentLevel, star);
-            starRewardValue = RewardController.GetStarReward(Master.LevelData.currentLevel, star);
-
-            Master.LevelData.SetLastLevel(Master.LevelData.currentLevel);
-            Master.LevelData.SetStarAtLevel(Master.LevelData.currentLevel, star);
-
-        }
-        else
-        {
-            Master.Audio.PlaySound("snd_defeat", 0.3f);
-
-            star = 0;
-            completeStatusTexture.mainTexture = Resources.Load<Texture2D>("Textures/UI/Dialog/LevelComplete/defeat_new");
-            starRewardLabel.text = "0";
-            gemRewardLabel.text = "0";
-            NGUITools.Destroy(nextButton);
-            buttonsGrid.Reposition();
-            shareButtons.SetActive(false);
-        }
-
-    }
-
     public override void OnShowComplete()
     {
         if (isVictory)
@@ -229,6 +162,75 @@ public class LevelCompleteDialog : DialogController
         });
         // }, this, true);
     }
+    
+    
+     public override void OnOpen(string[] agruments = null, Action onCloseComplete = null)
+    {
+        Master.Tutorial.CheckAndFinishTutorial();
+
+        //stop game
+        Time.timeScale = 0;
+        starRewardLabel.text = "--";
+        gemRewardLabel.text = "--";
+        allButtons.transform.localPosition = new Vector3(allButtons.transform.localPosition.x, -500, 0);
+        allButtons.SetActive(false);
+        //check is victory
+
+        if (Master.Gameplay.unitsDead >= Master.Level.currentLevelData.NumberOfUnitsAllowedDead || Master.Gameplay.zombiesEscaped > 0)
+        {
+            isVictory = false;
+        }
+
+        if (Master.LevelData.currentLevel <= Master.LevelData.lastLevel)
+        {
+            isPlayedThisLevel = true;
+        }
+
+        Master.Audio.StopBackgroundMusic();
+
+        if (isVictory)
+        {
+            Master.Stats.TimesLevelComplete++;
+
+            Master.Audio.PlaySound("snd_victory_2", 0.8f);
+
+            //calculate star
+            float percentUnitDead = ((float)Master.Gameplay.unitsDead / Master.Level.currentLevelData.NumberOfUnitsAllowedDead) * 100;
+            if (percentUnitDead < 20)
+            {
+                star = 3;
+            }
+            else if (percentUnitDead >= 20 && percentUnitDead < 45)
+            {
+                star = 2;
+            }
+
+            //set Status icon
+            completeStatusTexture.mainTexture = Resources.Load<Texture2D>("Textures/UI/Dialog/LevelComplete/victory_new");
+
+            //save level data
+            gemRewardValue = RewardController.GetGemReward(Master.LevelData.currentLevel, star);
+            starRewardValue = RewardController.GetStarReward(Master.LevelData.currentLevel, star);
+
+            Master.LevelData.SetLastLevel(Master.LevelData.currentLevel);
+            Master.LevelData.SetStarAtLevel(Master.LevelData.currentLevel, star);
+
+        }
+        else
+        {
+            Master.Audio.PlaySound("snd_defeat", 0.3f);
+
+            star = 0;
+            completeStatusTexture.mainTexture = Resources.Load<Texture2D>("Textures/UI/Dialog/LevelComplete/defeat_new");
+            starRewardLabel.text = "0";
+            gemRewardLabel.text = "0";
+            NGUITools.Destroy(nextButton);
+            buttonsGrid.Reposition();
+            shareButtons.SetActive(false);
+        }
+
+    }
+    
     void doShowStar(int starIndex)
     {
         //Master.Effect.CreateEffect("Effect_Star", stars[starIndex].transform.localPosition);

@@ -219,6 +219,17 @@ public class SkillDataController : MonoBehaviour
             Master.UIGameplay.ShowDialog(UIController.Dialog.ListDialogs.NewSkillUnlockDialog, 0.3f, new string[] { listSkillsUnlockStr }, null, actionAfterClose);
         }
     }
+    
+    public int GetGemRequireUpgrade(string skillID)
+    {
+        float value = (float)firstGemRequireUpgrade;
+        int currentUpgrade = GetUpgradeSkillByID(skillID);
+        for (int i = 0; i < currentUpgrade; i++)
+        {
+            value += (float)(value * increasePercentGemPerUpgrade) / 100;
+        }
+        return (int)value;
+    }
 
     public int GetUpgradeSkillByID(string skillID)
     {
@@ -264,17 +275,6 @@ public class SkillDataController : MonoBehaviour
         }
         value = Mathf.Round(value * 10f) / 10f;
         return value;
-    }
-
-    public int GetGemRequireUpgrade(string skillID)
-    {
-        float value = (float)firstGemRequireUpgrade;
-        int currentUpgrade = GetUpgradeSkillByID(skillID);
-        for (int i = 0; i < currentUpgrade; i++)
-        {
-            value += (float)(value * increasePercentGemPerUpgrade) / 100;
-        }
-        return (int)value;
     }
 
 }

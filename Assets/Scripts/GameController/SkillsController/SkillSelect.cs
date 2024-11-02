@@ -47,6 +47,19 @@ public class SkillSelect : MonoBehaviour
         AddEvent();
     }
 
+    void StartCountdown()
+    {
+        isCountingdown = true;
+        countdown.gameObject.SetActive(true);
+        Master.Effect.Fill(countdown, skillData.TimeCountdown, 1, 0, () =>
+          {
+              isCountingdown = false;
+              countdown.fillAmount = 1;
+              countdown.gameObject.SetActive(false);
+          });
+
+    }
+    
     public void AddEvent()
     {
         if (isLock) return;
@@ -70,19 +83,6 @@ public class SkillSelect : MonoBehaviour
                 isSelected = false;
             }
         });
-    }
-
-    void StartCountdown()
-    {
-        isCountingdown = true;
-        countdown.gameObject.SetActive(true);
-        Master.Effect.Fill(countdown, skillData.TimeCountdown, 1, 0, () =>
-          {
-              isCountingdown = false;
-              countdown.fillAmount = 1;
-              countdown.gameObject.SetActive(false);
-          });
-
     }
 
     public void OnTouchIn()

@@ -41,30 +41,6 @@ public class FreeRewardController : MonoBehaviour
         }
     }
 
-    public static bool IsSharedFacebook()
-    {
-        string dateTimeSharedFacebookStr = PlayerPrefs.GetString("DateTimeGetShareFacebookReward", "");
-        if (dateTimeSharedFacebookStr == "")
-        {
-            return false;
-        }
-        else
-        {
-            DateTime dateTimeSharedFacebook = DateTime.ParseExact(dateTimeSharedFacebookStr, "yyyy-MM-dd", null);
-           // DateTime currentDateTime = DateTime.Now;
-            DateTime currentDateTime = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd"), "yyyy-MM-dd", null);
-
-            if (currentDateTime.CompareTo(dateTimeSharedFacebook) == 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-    }
-
     public static bool IsCanGetFreeReward()
     {
         if (TimeRemainingFreeReward() == 0 || !IsSharedFacebook())
@@ -157,6 +133,30 @@ public class FreeRewardController : MonoBehaviour
         reward[1] = star;
 
         return reward;
+    }
+    
+    public static bool IsSharedFacebook()
+    {
+        string dateTimeSharedFacebookStr = PlayerPrefs.GetString("DateTimeGetShareFacebookReward", "");
+        if (dateTimeSharedFacebookStr == "")
+        {
+            return false;
+        }
+        else
+        {
+            DateTime dateTimeSharedFacebook = DateTime.ParseExact(dateTimeSharedFacebookStr, "yyyy-MM-dd", null);
+            // DateTime currentDateTime = DateTime.Now;
+            DateTime currentDateTime = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd"), "yyyy-MM-dd", null);
+
+            if (currentDateTime.CompareTo(dateTimeSharedFacebook) == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 
     //public static int[] GetShareFacebookReward()
