@@ -664,11 +664,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 448108, guid: f1d4ade80208cab4bb511ec0bcc49a85, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -512
+      value: -548
       objectReference: {fileID: 0}
     - target: {fileID: 448108, guid: f1d4ade80208cab4bb511ec0bcc49a85, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 223
+      value: 175
       objectReference: {fileID: 0}
     - target: {fileID: 448108, guid: f1d4ade80208cab4bb511ec0bcc49a85, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1695,9 +1695,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 652b3f4e95888c44bbecd6f45113b10d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  productListPanel: {fileID: 0}
-  pf_product: {fileID: 0}
-  isAssign: 0
 --- !u!114 &196167959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2791,7 +2788,7 @@ Transform:
   m_GameObject: {fileID: 238333559}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 310, z: 0}
+  m_LocalPosition: {x: 0, y: 269, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3158,15 +3155,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 413350, guid: b51a8e0b69956994c920bfbcbaf2c063, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -678
+      value: -717
       objectReference: {fileID: 0}
     - target: {fileID: 421460, guid: b51a8e0b69956994c920bfbcbaf2c063, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -382
+      value: -330.99997
       objectReference: {fileID: 0}
     - target: {fileID: 442810, guid: b51a8e0b69956994c920bfbcbaf2c063, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 442.00003
+      value: 394
       objectReference: {fileID: 0}
     - target: {fileID: 454320, guid: b51a8e0b69956994c920bfbcbaf2c063, type: 3}
       propertyPath: m_RootOrder
@@ -3202,7 +3199,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 499196, guid: b51a8e0b69956994c920bfbcbaf2c063, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 678
+      value: 717
       objectReference: {fileID: 0}
     - target: {fileID: 11411694, guid: b51a8e0b69956994c920bfbcbaf2c063, type: 3}
       propertyPath: uiCamera
@@ -4357,8 +4354,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0b1481bc5e82f24bb00198fc454b0ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enabled: 0
-  _isBuyFromShop: 0
 --- !u!4 &345389601
 Transform:
   m_ObjectHideFlags: 0
@@ -14244,7 +14239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scalingStyle: 2
   manualWidth: 1280
-  manualHeight: 720
+  manualHeight: 625
   minimumHeight: 320
   maximumHeight: 1536
   fitWidth: 1
@@ -14261,7 +14256,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.0027777778, y: 0.0027777778, z: 0.0027777778}
+  m_LocalScale: {x: 0.0032, y: 0.0032, z: 0.0032}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1087695259}
@@ -16682,7 +16677,7 @@ MonoBehaviour:
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 4
-  mClipRange: {x: 0, y: 0, z: 1280, w: 720}
+  mClipRange: {x: 0, y: 0, z: 1374.4, w: 720}
   mClipSoftness: {x: 4, y: 4}
   mDepth: 0
   mSortingOrder: 0
@@ -16774,7 +16769,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: 0
-  dragEffect: 2
+  dragEffect: 1
   restrictWithinPanel: 1
   disableDragIfFits: 0
   smoothDragStart: 1
@@ -21083,7 +21078,7 @@ Transform:
   m_GameObject: {fileID: 2061089538}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -360, z: 0}
+  m_LocalPosition: {x: 0, y: -312, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
